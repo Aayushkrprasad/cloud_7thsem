@@ -10,6 +10,41 @@ This project deploys a Windows Server VM in AWS that serves a dynamic, live diag
 
 ---
 
+## 📂 Repository Directory Structure
+
+```
+cloud-server-health-card/
+├── README.md                              # Main documentation & lab submission report
+├── deployment.json                        # VM facts configuration (cloud, region, zone, size, owner)
+├── .gitignore                             # Git ignore rules
+├── docs/                                  # Project documentation & proof screenshots
+│   ├── CLOUD-SETUP.md                     # Step 0 cloud VM setup guide (AWS/Azure/GCP)
+│   ├── INSTRUCTOR-NOTES.md                # Instructor reference notes
+│   └── images/                            # Checkpoint verification screenshots
+│       ├── checkpoint1_vm_creation.png
+│       ├── checkpoint2_iis_site_started.png
+│       ├── checkpoint3_and_4_healthcard_pulse.png
+│       ├── checkpoint5_laptop_browser_access.png
+│       └── checkpoint6_all_checks_passed.png
+├── scripts/                               # Deployment & automation PowerShell scripts
+│   ├── 1-Setup-IIS.ps1                    # Installs IIS, opens firewall port 80, publishes web site
+│   ├── 2-Collect-Status.ps1               # Collects server metrics and updates status.json
+│   ├── 3-Schedule-Collector.ps1          # Registers Windows Scheduled Task (SYSTEM)
+│   └── 4-Verify.ps1                       # Automated 9-check verification script
+└── site/                                  # Web site published to IIS (C:\inetpub\HealthCard)
+    ├── index.html                         # Web interface HTML layout
+    ├── health.txt                         # Lightweight health endpoint
+    ├── web.config                         # IIS MIME types, caching & default doc configuration
+    ├── css/
+    │   └── style.css                      # Application styling
+    ├── js/
+    │   └── app.js                         # Frontend status fetching & pulse strip rendering
+    └── data/
+        └── status.sample.json             # Sample telemetry schema format
+```
+
+---
+
 ## ⚙️ Infrastructure & Deployment Details
 
 | Specification | Value |
